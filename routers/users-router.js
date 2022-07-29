@@ -1,42 +1,41 @@
+/*
+/localhost:5000/modules
+
+*/ 
+
 // Imports
+import { tableOfUsers } from '../data/tableOfUsers.js'
+import controller from '../controllers/modules-controller.js';
 import { Router } from 'express';
-import { tableOfModules } from '../data/tableOfModules.js'
 
 
 // Configure CRUDL endpoints
 const router = Router()
 
-
-router.get('/', (req, res) => {
-  // Validate request
-  // Access data model
-  // Response to request
-  res.json(tableOfModules)
-})
-
+router.get('/', controller.list)
 
 router.get('/:id', (req, res) => {
   // Validate request
   // Access data model
-  const module = tableOfModules.find((module) => module.ModuleID === parseInt(req.params.id))
-  if (!module) res.status(404).json({ Message: `Recrod ${req.params.id} not found`})
+  const user = tableOfUsers.find((user) => user.UserID === parseInt(req.paramsid))
+  if (!user) return res.status(404).json({ Message: `Record ${req.params.id} not found`})
   // Response to request
-  res.json(module)
+  res.json(user)
 })
 
 router.post('/', (req, res) => {
   // Validate request
   // Access data model
-  const newModule = { ...req.body, "ModuleID": tableOfModules.length + 1 }
-  tableOfModules.push(newModule)
+  const newUser = { ...req.body, "UserID": tableOfUsers.reduce((max, curr) => currUserID > max.UserID ? curr : max).UserID + 1 }
+  tableOfUsers.push(newUser)
   // Response to request
-  res.json(newModule)
+  res.json(newUser)
 })
 
 router.put('/:id', (req, res) => {
   // Validate request
   // Access data model
-  const module = tableOfModules.find((module) => module.ModuleID === parseInt(req.params.id))
+  const module = tableOfUsers.find((module) => module.ModuleID === parseInt(req.params.id))
   if (!module) res.status(404).json({ Message: `Recrod ${req.params.id} not found`})
   module.ModuleName = req.module.ModuleName || module.ModuleName
   module.ModuleCode = req.module.ModuleCode || module.ModuleCode
@@ -50,9 +49,9 @@ router.put('/:id', (req, res) => {
 router.delete('/:id', (req, res) => {
   // Validate request
   // Access data model
-  const index = tableOfModules.findIndex((module) => module.ModuleID === parseInt(req.params.id))
-  if (index<0) return res.status(404).json({ Message: `Recrod ${req.params.id} not found`})
-  tableOfModules.splice(index, 1);
+  const index = tableOfUsers.findIndex((module) => module.ModuleID === parseInt(req.params.id))
+  if (index<0) return res.status(404).json({ Message: `Record ${req.params.id} not found`})
+  tableOfUsers.splice(index, 1);
   // Response to request
   res.json({ Message: `Record ${req.params.id} deleted` })
 })
