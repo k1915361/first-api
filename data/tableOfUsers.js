@@ -550,3 +550,5 @@ export let tableOfUsers = [
     "UserImageURL": "https://images.generated.photos/H8-7k5M57zi3_zyK-XMFWaTomaVt7GLUfEvUmfoA3sk/rs:fit:256:256/czM6Ly9pY29uczgu/Z3Bob3Rvcy1wcm9k/LnBob3Rvcy92M18w/MzMwODkyLmpwZw.jpg"
   }
 ]
+
+export default tableOfUsers

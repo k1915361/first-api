@@ -81,3 +81,4 @@ export let tableOfModules = [
   }
 ];
 
+export default tableOfModules

@@ -1,6 +1,11 @@
 // Imports
 import joi from 'joi'
-import { tableOfModules } from "../data/tableOfModules.js";
+import records from "../data/tableOfModules.js";
+
+// Model
+const idKey = 'ModuleID'
+const mutableKeys = ['ModuleName', 'ModuleCode', 'ModuleLevel','ModuleLeaderID','ModuleImageURL']
+
 
 // Schema
 
@@ -15,13 +20,12 @@ const objSchema = joi.object({
   ModuleImageURL: joi.string().uri(),
 })
 
-const mutableAttributes = ['ModuleName', 'ModuleCode', 'ModuleLevel','ModuleLeaderID','ModuleImageURL']
 
-const createSchema = objSchema.and( ...mutableAttributes )
+const createSchema = objSchema.and( ...mutableKeys )
 
 const updateSchema = joi.object({ 
   id: idSchema, 
-  obj: objSchema.or(...mutableAttributes)
+  obj: objSchema.or(...mutableKeys)
 })
 
 
@@ -33,7 +37,7 @@ const list = (req, res) => {
   // Validate request
   // Access data model
   // Response to request
-  res.json(tableOfModules)
+  res.json(records)
 }
 
 const get = (req, res) => {
@@ -42,11 +46,12 @@ const get = (req, res) => {
   if(error) return res.status(400).json({ message: reportErrors(error) })
 
   // Access data model
-  const module = tableOfModules.find((module) => module.ModuleID === parseInt(req.params.id))
-  if (!module) return res.status(404).json({ Message: `Record ${req.params.id} not found`})
+  
+  const record = records.find((record) => record[idKey] === parseInt(req.params.id))
+  if (!record) return res.status(404).json({ Message: `Record ${req.params.id} not found`})
   
   // Response to request
-  res.json(module)
+  res.json(record)
 }
 
 const post = (req, res) => {
@@ -55,11 +60,11 @@ const post = (req, res) => {
   if (error) return res.status(400).json({ message: reportErrors(error) })
   
   // Access data model
-  const newModule = {...req.body, "ModuleID": tableOfModules.reduce((max, curr) => curr.ModuleID > max.ModuleID ? curr : max).ModuleID }
-  tableOfModules.push(newModule)
+  const record = {...req.body, [idKey]: records.reduce((max, curr) => curr[idKey] > max[idKey] ? curr : max)[idKey] }
+  records.push(record)
   
   // Response to request
-  res.json(module)
+  res.json(record)
 }
 
 
@@ -69,12 +74,12 @@ const put = (req, res) => {
   if (error) return res.status(400).json({ message: reportErrors(error) })
   
   // Access data model
-  const module = tableOfModules.find((module) => module.ModuleID === parseInt(req.params.id)) 
-  if(!module) return res.status(404).json({ message: `Record ${req.params.id} not found` })
-  mutableAttributes.map((key) => module[key] = req.body[key] || module[key] )
+  const record = records.find((record) => record[idKey] === parseInt(req.params.id)) 
+  if(!record) return res.status(404).json({ message: `Record ${req.params.id} not found` })
+  mutableKeys.map((key) => record[key] = req.body[key] || record[key] )
   
   // Response to request
-  res.json(module)
+  res.json(record)
 }
 
 const _delete = (req, res) => {
@@ -83,9 +88,9 @@ const _delete = (req, res) => {
   if(error) return res.status(400).json({ message: reportErrors(error) })
 
   // Access data model
-  const index = tableOfModules.findIndex((module) => module.ModuleID === parseInt(req.params.id))
+  const index = records.findIndex((record) => record[idKey] === parseInt(req.params.id))
   if (index < 0) return res.status(404).json({ Message: `Record ${req.params.id} not found`})
-  tableOfModules.splice(index, 1);
+  records.splice(index, 1);
   
   // Response to request
   res.json({ Message: `Record ${req.params.id} deleted` })
