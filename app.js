@@ -1,18 +1,24 @@
 // Imports
 import express from 'express';
-// import router from './routers/modules.js';
-import controller from './routers/modules-router.js';
-
-router = controller
+import modulesRouter from './routers/modules-router.js';
+import usersRouter from './routers/users-router.js';
 
 // Configure express app
 const app = express()
 
 // Configure middleware
+// app.use(express.json())
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*")
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
+  next()
+})
 app.use(express.json())
 
+
 // Configure CRUDL endpoints
-app.use('/api/modules', controller)
+app.use('/api/modules', modulesRouter)
+app.use('/api/users', usersRouter)
 
 // Start server
 const PORT = process.env.PORT || 5000

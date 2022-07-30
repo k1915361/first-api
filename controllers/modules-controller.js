@@ -62,6 +62,7 @@ const post = (req, res) => {
   res.json(module)
 }
 
+
 const put = (req, res) => {
   // Validate request
   const { error } = updateSchema.validate({ id: req.params.id, obj: req.body }, {abortEarly: false})
@@ -95,6 +96,6 @@ controller.list = list
 controller.get = get
 controller.post = post
 controller.put = put
-controller._delete = _delete
+controller.delete = _delete
 
 export default controller
