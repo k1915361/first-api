@@ -1,75 +1,73 @@
 export class Controller {
-  constructor(model, schema, records) {
-    this.idKey = model.idKey;
-    this.mutableKeys = model.mutableKeys;
-    this.idSchema = schema.idSchema;
-    this.createSchema = schema.createSchema;
-    this.updateSchema = schema.updateSchema;
-    this.records = records;
+  constructor(validator, accessor) {
+    this.validator = validator;
+    this.accessor = accessor
   };
 
   // Methods
 
-  reportErrors = (error) => error.details.map(detail => detail.message);
 
   list = (req, res) => {
     // Validate request
+    // No validation required
+    
     // Access data model
+    const { isSuccess, result, message: accessorMessage } = this.accessor.list()
+    if(!isSuccess) return res.status(400).json({ message: accessorMessage });
+
     // Response to request
-    res.json(this.records);
+    res.json(result);
   };
 
   get = (req, res) => {
     // Validate request
-    const { error } = this.idSchema.validate(req.params.id);
-    if(error) return res.status(400).json({ message: this.reportErrors(error) });
-
-    // Access data model
-    const record = this.records.find((record) => record[this.idKey] === parseInt(req.params.id));
-    if (!record) return res.status(404).json({ message: `Record ${req.params.id} not found`});
+    const { isError, message: validationMessage } = this.validator.validateID(req.params.id)
+    if(isError) return res.status(400).json({ message: validationMessage });
     
+    // Access data model
+    const { isSuccess, result, message: accessorMessage } = this.accessor.read(req.params.id)
+    if(!isSuccess) return res.status(404).json({ message: accessorMessage });
+        
     // Response to request
-    res.json(record);
+    res.json(result);
   };
 
   post = (req, res) => {
     // Validate request
-    const { error } = this.createSchema.validate(req.body, {abortEarly: false});
-    if (error) return res.status(400).json({ message: this.reportErrors(error) });
-    
+    const { isError, message: validatorMessage } = this.validator.validateCreate(req.body)
+    if(isError) return res.status(400).json({ message: validatorMessage });
+        
     // Access data model
-    const record = {...req.body, [this.idKey]: this.records.reduce((max, curr) => curr[this.idKey] > max[this.idKey] ? curr : max)[this.idKey] };
-    this.records.push(record);
-    
+    const { isSuccess, result, message: accessorMessage } = this.accessor.create(req.params.body)
+    if(!isSuccess) return res.status(404).json({ message: accessorMessage });
+        
     // Response to request
-    res.json(record);
+    res.json(result);
   };
 
 
   put = (req, res) => {
     // Validate request
-    const { error } = this.updateSchema.validate({ id: req.params.id, obj: req.body }, {abortEarly: false})
-    if (error) return res.status(400).json({ message: this.reportErrors(error) })
-    
+    const { isError, message: validatorMessage } = this.validator.validateUpdate({ id: req.params.id, obj: req.body })
+    if (isError) return res.status(400).json({ message: validatorMessage });
+        
     // Access data model
-    const record = this.records.find((record) => record[this.idKey] === parseInt(req.params.id)) ;
-    if(!record) return res.status(404).json({ message: `Record ${req.params.id} not found` });
-    this.mutableKeys.map((key) => record[key] = req.body[key] || record[key] );
-    
+    const { isSuccess, result, message: accessorMessage } = this.accessor.update(req.params.id, req.body)
+    if(!isSuccess) return res.status(404).json({ message: accessorMessage });
+        
     // Response to request
-    res.json(record);
+    res.json(result);
   };
 
   delete = (req, res) => {
     // Validate request
-    const { error } = this.idSchema.validate(req.params.id);
-    if(error) return res.status(400).json({ message: this.reportErrors(error) });
-
-    // Access data model
-    const index = this.records.findIndex((record) => record[this.idKey] === parseInt(req.params.id));
-    if (index < 0) return res.status(404).json({ message: `Record ${req.params.id} not found`});
-    this.records.splice(index, 1);
+    const { isError, message: validatorMessage } = this.validator.validateID(req.params.id)
+    if(isError) return res.status(400).json({ message: validatorMessage });
     
+    // Access data model
+    const { isSuccess, result, message: accessorMessage } = this.accessor.delete(req.params.id)
+    if(!isSuccess) return res.status(404).json({ message: accessorMessage });
+        
     // Response to request
     res.json({ message: `Record ${req.params.id} deleted` });
   };

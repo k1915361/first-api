@@ -1,16 +1,23 @@
 // Imports
 import { Router } from 'express';
-import model from '../controllers/users-model.js'
-import schema from '../controllers/users-schema.js'
-import records from '../data/tableOfUsers.js'
+import model from '../model/datafiles/users-model.js'
+import schema from '../validator/users-schema.js'
+import Validator from "../validator/Validator.js"
+import Accessor from '../model/datafiles/Accessor.js'
 import Controller from "../controllers/Controller.js"
 
 
 // Configure CRUDL endpoints
 const router = Router()
 
+// Configure Validator
+const validator = new Validator(schema)
+
+// Configure Accessor
+const accessor = new Accessor(model)
+
 // Configure Controller
-const controller = new Controller(model, schema, records)
+const controller = new Controller(validator, accessor)
 
 
 // List all records

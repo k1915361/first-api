@@ -1,7 +1,7 @@
 // Imports
 import express from 'express';
-import modulesRouter from './routers/modules-router.js';
-import usersRouter from './routers/users-router.js';
+import modulesRouter from './router/modules-router.js';
+import usersRouter from './router/users-router.js';
 
 // Configure express app
 const app = express()
