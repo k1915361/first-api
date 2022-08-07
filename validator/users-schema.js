@@ -16,7 +16,9 @@ const objSchema = joi.object({
   UserImageURL: joi.string().uri(),
 })
 
-const mutableKeys = ['UserFirstname','UserLastname','UserEmail','UserPassword','UserRegistered','UserUsertypeID', 'UserLevel','UserImageURL']
+const mutableKeys = [
+  'UserFirstname','UserLastname','UserEmail','UserPassword','UserRegistered','UserUsertypeID', 'UserLevel','UserImageURL'
+]
 
 const createSchema = objSchema.and( ...mutableKeys )
 

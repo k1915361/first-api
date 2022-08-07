@@ -8,7 +8,7 @@ class Accessor {
   // Methods
 
   create = (obj) => {
-    const record = { ...obj, [this.idKey]: this.records.reduce((max, curr) => curr[this.idKey] > max[this.idKey] ? curr : max)[this.idKey] };
+    const record = { ...obj, [this.idKey]: this.records.reduce((max, curr) => curr[this.idKey] > max[this.idKey] ? curr : max)[this.idKey] + 1};
     this.records.push(record);
     return { isSuccess: true, result: this.records, message: "Record successfully inserted" }
 
@@ -17,8 +17,8 @@ class Accessor {
   read = (id) => {
     const record = this.records.find((record) => record[this.idKey] === parseInt(id));
     return record
-    ? { isSuccess: true, result: this.records, message: "Records successfully recovered" }
-    : { isSuccess: false, result: null, message: "Record ${id} not found" };
+      ? { isSuccess: true, result: record, message: "Records successfully recovered" }
+      : { isSuccess: false, result: null, message: "Record ${id} not found" };
   }
 
   update = (id, obj) => {
@@ -32,19 +32,12 @@ class Accessor {
     const index = this.records.findIndex((record) => record[this.idKey] === parseInt(id));
     if (index < 0) return { isSuccess: false, result: null, message: `Record ${id} not found`};
     this.records.splice(index, 1);
-    return { isSuccess: true, result: null, message: "Record successfully deleted" }
+    return { isSuccess: true, result: null, message: `Record ID:${index} successfully deleted` }
   }
 
   list = () => this.records.length === 0 
     ? { isSuccess: false, result: null, message: "No records found" }
     : { isSuccess: true, result: this.records, message: "Records successfully recovered" };
-  
-
-
-
-  
-
-  
 
 }
 

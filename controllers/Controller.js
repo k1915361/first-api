@@ -21,8 +21,8 @@ export class Controller {
 
   get = (req, res) => {
     // Validate request
-    const { isError, message: validationMessage } = this.validator.validateID(req.params.id)
-    if(isError) return res.status(400).json({ message: validationMessage });
+    const { isError, message: validatorMessage } = this.validator.validateID(req.params.id)
+    if(isError) return res.status(400).json({ message: validatorMessage });
     
     // Access data model
     const { isSuccess, result, message: accessorMessage } = this.accessor.read(req.params.id)

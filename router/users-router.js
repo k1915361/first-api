@@ -33,8 +33,3 @@ router.delete('/:id', controller.delete)
 
 export default router
 
-/*
-
-/localhost:5000/users modules/1
-
-*/ 
