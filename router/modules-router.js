@@ -30,3 +30,11 @@ router.put('/:id', controller.put)
 router.delete('/:id', controller.delete)
 
 export default router
+
+
+
+/*
+
+localhost:5000/api/modules/1 users
+
+*/

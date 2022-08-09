@@ -10,7 +10,7 @@ class Accessor {
   create = (obj) => {
     const record = { ...obj, [this.idKey]: this.records.reduce((max, curr) => curr[this.idKey] > max[this.idKey] ? curr : max)[this.idKey] + 1};
     this.records.push(record);
-    return { isSuccess: true, result: this.records, message: "Record successfully inserted" }
+    return { isSuccess: true, result: record, message: "Record successfully inserted" }
 
   }
 
@@ -18,7 +18,7 @@ class Accessor {
     const record = this.records.find((record) => record[this.idKey] === parseInt(id));
     return record
       ? { isSuccess: true, result: record, message: "Records successfully recovered" }
-      : { isSuccess: false, result: null, message: "Record ${id} not found" };
+      : { isSuccess: false, result: null, message: `Record ${id} not found` };
   }
 
   update = (id, obj) => {

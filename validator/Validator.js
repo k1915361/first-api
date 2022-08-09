@@ -6,7 +6,7 @@ class Validator {
   }
 
   // Helpers
-  reportErrors = (error) => error.details.map(detail => detail.message);
+  reportErrors = (errors) => errors.details.map(detail => detail.message);
 
   validate(schema, value){
     const { error } = schema.validate(value, { abortEarly: false });
@@ -18,7 +18,7 @@ class Validator {
   // Mehthods
 
   validateID = (id) => this.validate(this.idSchema, id)
-  validateCreate = (obj) => this.validate(this.createScema, obj)
+  validateCreate = (obj) => this.validate(this.createSchema, obj)
   validateUpdate = (obj) => this.validate(this.updateSchema, obj)
 
 }
