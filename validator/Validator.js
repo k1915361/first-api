@@ -5,22 +5,21 @@ class Validator {
     this.updateSchema = schema.updateSchema;
   }
 
-  // Helpers
-  reportErrors = (errors) => errors.details.map(detail => detail.message);
+  // Helpers ---------------------------------------
+  reportErrors = (errors) => errors.details.map((detail) => detail.message);
 
-  validate(schema, value){
+  validate(schema, value) {
     const { error } = schema.validate(value, { abortEarly: false });
     return error
       ? { isError: true, message: this.reportErrors(error) }
-      : { isErorr: false, message: null }
+      : { isError: false, message: null };
   }
 
-  // Mehthods
-
-  validateID = (id) => this.validate(this.idSchema, id)
-  validateCreate = (obj) => this.validate(this.createSchema, obj)
-  validateUpdate = (obj) => this.validate(this.updateSchema, obj)
+  // Methods ---------------------------------------
+  validateID = (id) => this.validate(this.idSchema, id);
+  validateCreate = (obj) => this.validate(this.createSchema, obj);
+  validateUpdate = (obj) => this.validate(this.updateSchema, obj);
 
 }
 
-export default Validator
+export default Validator;

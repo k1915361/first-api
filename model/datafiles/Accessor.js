@@ -7,12 +7,16 @@ class Accessor {
 
   // Methods
 
+  // create = (obj) => {
+  //   const record = { ...obj, [this.idKey]: this.records.reduce((max, curr) => curr[this.idKey] > max[this.idKey] ? curr : max)[this.idKey] + 1 };
+  //   this.records.push(record);
+  //   return { isSuccess: true, result: record, message: "Record successfully inserted" }
+  // }
   create = (obj) => {
-    const record = { ...obj, [this.idKey]: this.records.reduce((max, curr) => curr[this.idKey] > max[this.idKey] ? curr : max)[this.idKey] + 1};
+    const record = { ...obj, [this.idKey]: this.records.reduce((max, curr) => curr[this.idKey] > max[this.idKey] ? curr : max)[this.idKey] + 1 };
     this.records.push(record);
-    return { isSuccess: true, result: record, message: "Record successfully inserted" }
-
-  }
+    return { isSuccess: true, result: record, message: "Record successfully inserted" };
+  };
 
   read = (id) => {
     const record = this.records.find((record) => record[this.idKey] === parseInt(id));

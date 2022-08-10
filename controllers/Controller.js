@@ -34,17 +34,16 @@ export class Controller {
 
   post = (req, res) => {
     // Validate request
-    const { isError, message: validatorMessage } = this.validator.validateCreate(req.body)
-    if(isError) return res.status(400).json({ message: validatorMessage });
-        
+    const { isError, message: validatorMessage } = this.validator.validateCreate(req.body);
+    if (isError) return res.status(400).json({ message: validatorMessage });
+
     // Access data model
-    const { isSuccess, result, message: accessorMessage } = this.accessor.create(req.params.body)
-    if(!isSuccess) return res.status(404).json({ message: accessorMessage });
-        
+    const { isSuccess, result, message: accessorMessage } = this.accessor.create(req.body);
+    if (!isSuccess) return res.status(404).json({ message: accessorMessage });
+
     // Response to request
     res.json(result);
   };
-
 
   put = (req, res) => {
     // Validate request

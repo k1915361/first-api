@@ -5,7 +5,7 @@ export let tableOfModules = [
     ModuleCode: "CI2270",
     ModuleLevel: 4,
     ModuleLeaderID: 1,
-    ModuleImage: "https://images.freeimages.com/images/small-previews/9b8/electronic-components-2-1242738.jpg"
+    ModuleImageURL: "https://images.freeimages.com/images/small-previews/9b8/electronic-components-2-1242738.jpg"
   },
   {
     ModuleID: 2,
@@ -13,7 +13,7 @@ export let tableOfModules = [
     ModuleCode: "CI7446",
     ModuleLevel: 7,
     ModuleLeaderID: 2,
-    ModuleImage: "https://images.freeimages.com/images/small-previews/411/light-of-technology-1510575.jpg"
+    ModuleImageURL: "https://images.freeimages.com/images/small-previews/411/light-of-technology-1510575.jpg"
   },
   {
     ModuleID: 3,
@@ -21,7 +21,7 @@ export let tableOfModules = [
     ModuleCode: "CI6388",
     ModuleLevel: 6,
     ModuleLeaderID: 3,
-    ModuleImage: "https://images.freeimages.com/images/small-previews/64b/vla-1-1315506.jpg"
+    ModuleImageURL: "https://images.freeimages.com/images/small-previews/64b/vla-1-1315506.jpg"
   },
   {
     ModuleID: 4,
@@ -29,7 +29,7 @@ export let tableOfModules = [
     ModuleCode: "CI8502",
     ModuleLevel: 6,
     ModuleLeaderID: 4,
-    ModuleImage: "https://images.freeimages.com/images/small-previews/293/cable-4-1243085.jpg"
+    ModuleImageURL: "https://images.freeimages.com/images/small-previews/293/cable-4-1243085.jpg"
   },
   {
     ModuleID: 5,
@@ -37,7 +37,7 @@ export let tableOfModules = [
     ModuleCode: "CI7572",
     ModuleLevel: 7,
     ModuleLeaderID: 5,
-    ModuleImage: "https://images.freeimages.com/images/small-previews/fa1/cable-5-1243077.jpg"
+    ModuleImageURL: "https://images.freeimages.com/images/small-previews/fa1/cable-5-1243077.jpg"
   },
   {
     ModuleID: 6,
@@ -45,7 +45,7 @@ export let tableOfModules = [
     ModuleCode: "CI5068",
     ModuleLevel: 7, 
     ModuleLeaderID: 6, 
-    ModuleImage: "https://images.freeimages.com/images/small-previews/930/towertv-3-1423238.jpg"
+    ModuleImageURL: "https://images.freeimages.com/images/small-previews/930/towertv-3-1423238.jpg"
   },
   {
     ModuleID: 7,
@@ -53,7 +53,7 @@ export let tableOfModules = [
     ModuleCode: "CI9213",
     ModuleLevel: 5,
     ModuleLeaderID: 7,
-    ModuleImage: "https://images.freeimages.com/images/small-previews/cf5/cellphone-1313194.jpg"
+    ModuleImageURL: "https://images.freeimages.com/images/small-previews/cf5/cellphone-1313194.jpg"
   },
   {
     ModuleID: 8,
@@ -61,7 +61,7 @@ export let tableOfModules = [
     ModuleCode: "CI5856",
     ModuleLevel: 7,
     ModuleLeaderID: 8,
-    ModuleImage: "https://images.freeimages.com/images/small-previews/4e8/sala-de-parto-03-1432033.jpg"
+    ModuleImageURL: "https://images.freeimages.com/images/small-previews/4e8/sala-de-parto-03-1432033.jpg"
   },
   {
     ModuleID: 9,
@@ -69,7 +69,7 @@ export let tableOfModules = [
     ModuleCode: "CI3651",
     ModuleLevel: 7,
     ModuleLeaderID: 9,
-    ModuleImage: "https://images.freeimages.com/images/small-previews/6cc/monitor-2-1242535.jpg"
+    ModuleImageURL: "https://images.freeimages.com/images/small-previews/6cc/monitor-2-1242535.jpg"
   },
   {
     ModuleID: 10,
@@ -77,7 +77,7 @@ export let tableOfModules = [
     ModuleCode: "CI7952",
     ModuleLevel: 5,
     ModuleLeaderID: null,
-    ModuleImage: "https://images.freeimages.com/images/small-previews/402/rocket-in-the-museum-1450195.jpg"
+    ModuleImageURL: "https://images.freeimages.com/images/small-previews/402/rocket-in-the-museum-1450195.jpg"
   }
 ];
 
