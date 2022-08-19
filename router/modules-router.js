@@ -1,9 +1,9 @@
 // Imports
 import { Router } from 'express'
-import model from '../model/datafiles/modules-model.js'
+import model from '../model/database/modules-model.js'
 import schema from '../validator/modules-schema.js'
 import Validator from "../validator/Validator.js"
-import Accessor from '../model/datafiles/Accessor.js'
+import Accessor from '../model/database/Accessor.js'
 import Controller from "../controllers/Controller.js"
 
 // Configure CRUDL endpoints ---------------------
