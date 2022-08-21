@@ -15,7 +15,7 @@ dbStructure.extendedFields = `${dbStructure.fields}, Years.YearName AS UserYearN
 const dbConformance = {};
 dbConformance.recordToObject = (record) => { return {...record, UserRegistered: record.UserRegistered ? true: false};};
 dbConformance.objToRecord = (obj) => dbStructure.mutableFields.reduce((prevRecord, currField) => { 
- if(object.keys(obj).includes(currField)) prevRecord[currField] = obj[currField];
+ if (Object.keys(obj).includes(currField)) prevRecord[currField] = obj[currField];
  return prevRecord;
 }, {});
 
