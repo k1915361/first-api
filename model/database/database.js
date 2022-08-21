@@ -10,8 +10,11 @@ const dbConfig = {
     host: process.env.DB_HOST || 'localhost',
     user: process.env.DB_USER || 'root',
     password: process.env.DB_PSWD || '',
-    namedPlacedholders: true,
+    namedPlaceholders: true
 };
+
+let connection = null;
+
 try {
     connection = await mysql.createConnection(dbConfig);
 } 
