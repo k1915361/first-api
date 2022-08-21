@@ -45,7 +45,7 @@ dbConncetion
    };
   }
 
-  update = async (obj) => {
+  update = async (id, obj) => {
     const record = this.dbConformance.objToRecord(obj);
     const sql = `UPDATE ${this.dbStructure.table} ${this.buildSetTemplate(record)} WHERE ${this.dbStructure.idField}=${id}`; 
     try {
